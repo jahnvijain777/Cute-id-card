@@ -1,0 +1,170 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#000000;
+    overflow:hidden;
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(1px 1px at 20px 30px, white, rgba(255,255,255,.2)),
+        radial-gradient(1px 1px at 60px 70px, white, rgba(255,255,255,.3)),
+        radial-gradient(0.5px 0.5px at 50px 50px, white, rgba(255,255,255,.2)),
+        radial-gradient(0.5px 0.5px at 130px 80px, white, rgba(255,255,255,.2)),
+        radial-gradient(1px 1px at 90px 10px, white, rgba(255,255,255,.3)),
+        radial-gradient(0.5px 0.5px at 130px 50px, white, rgba(255,255,255,.2)),
+        radial-gradient(1px 1px at 10px 90px, white, rgba(255,255,255,.3));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 0;
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+.splash-container{
+    text-align:center;
+    animation:fadeIn 1.5s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.splash-container img{
+    width:150px;
+    animation: rotateLogo 3s ease-in-out infinite, pulsGlow 2s ease-in-out infinite;
+    filter:
+    drop-shadow(0 0 10px #00ccff)
+    drop-shadow(0 0 20px #00ccff);
+}
+
+.restart-btn {
+    margin-top: 30px;
+    padding: 12px 24px;
+    background-color: #00ccff;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ccff;
+}
+
+.restart-btn:hover {
+    background-color: #00ffff;
+    box-shadow: 0 0 20px #00ccff;
+    transform: scale(1.05);
+}
+
+.restart-btn:active {
+    transform: scale(0.98);
+}
+
+.continue-btn {
+    margin-top: 15px;
+    padding: 12px 24px;
+    background-color: #ff4da6;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #ff4da6;
+}
+
+.continue-btn:hover {
+    background-color: #ff66b8;
+    box-shadow: 0 0 20px #ff4da6;
+    transform: scale(1.05);
+}
+
+.continue-btn:active {
+    transform: scale(0.98);
+}
+
+.splash-container h1{
+    color:rgb(0, 0, 0);
+    margin-top:30px;
+    font-size:28px;
+    letter-spacing:2px;
+    animation: textGlow 2s ease-in-out infinite;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:scale(0.8);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+@keyframes rotateLogo{
+    0% {
+        transform: rotateZ(0deg);
+    }
+    50% {
+        transform: rotateZ(15deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+@keyframes pulsGlow{
+    0%, 100% {
+        filter: drop-shadow(0 0 10px #00ccff) drop-shadow(0 0 20px #00ccff);
+    }
+    50% {
+        filter: drop-shadow(0 0 20px #00ccff) drop-shadow(0 0 40px #ff4da6);
+    }
+}
+
+@keyframes textGlow{
+    0%, 100% {
+        text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+        color: #ffffff;
+    }
+    50% {
+        text-shadow: 0 0 20px #ff4da6, 0 0 30px #00ccff;
+        color: #ff4da6;
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.splash-container.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}

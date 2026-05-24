@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron Splash</title>
+
+    <link rel="stylesheet" href="splash.css">
+
+    <script>
+        let animationTimeout;
+        let redirectTimeout;
+
+        function startAnimation() {
+            clearTimeout(animationTimeout);
+            clearTimeout(redirectTimeout);
+            document.querySelector('.splash-container').classList.remove('fade-out');
+            
+            animationTimeout = setTimeout(() => {
+                document.querySelector('.splash-container').classList.add('fade-out');
+                redirectTimeout = setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 500);
+            }, 3500);
+        }
+
+        function restartAnimation() {
+            startAnimation();
+        }
+
+        startAnimation();
+    </script>
+
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="splash-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Electron_Software_Framework_Logo.svg"
+        alt="Electron Logo">
+        <h1>Made with Electron</h1>
+        <button class="restart-btn" onclick="restartAnimation()">Restart Animation</button>
+        <button class="continue-btn" onclick="window.location.href='index.html'">Continue</button>
+    </div>
+
+</body>
+</html>

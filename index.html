@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute ID Card</title>
+
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-section" id="formSection">
+            <h2>Create Your ID Card</h2>
+            <form id="cardForm">
+                <input type="text" id="nameInput" placeholder="Enter Your Name" required>
+                <input type="number" id="ageInput" placeholder="Enter Your Age" required>
+                <input type="text" id="collegeInput" placeholder="Enter Your College" required>
+                <input type="text" id="hobbiesInput" placeholder="Enter Hobbies (comma separated)" required>
+                <button type="submit" class="submit-btn">Create Card</button>
+            </form>
+        </div>
+
+        <div class="card" id="cardDisplay" style="display:none;">
+            <img src="figma.ico" alt="My Picture">
+
+            <div class="info">
+                <h1 id="displayName">Jahnvi Jain</h1>
+
+                <h2 id="displayAge">Age: 18</h2>
+                <h2 id="displayCollege">College: CT University</h2>
+                <h2 id="displayHobbies">Hobbies: </h2>
+                <button class="restart-btn" onclick="window.location.href='splash.html'">Restart</button>
+                <button class="edit-btn" onclick="editCard()">Edit Card</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('cardForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('nameInput').value;
+            const age = document.getElementById('ageInput').value;
+            const college = document.getElementById('collegeInput').value;
+            const hobbies = document.getElementById('hobbiesInput').value;
+            
+            // Display the card
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('cardDisplay').style.display = 'block';
+            
+            // Update card content
+            document.getElementById('displayName').textContent = name;
+            document.getElementById('displayAge').textContent = `Age: ${age}`;
+            document.getElementById('displayCollege').textContent = `College: ${college}`;
+            
+            // Create hobby buttons
+            const hobbiesArray = hobbies.split(',').map(h => h.trim());
+            const hobbiesHTML = hobbiesArray.map(h => `<button>${h}</button>`).join('');
+            document.getElementById('displayHobbies').innerHTML = `Hobbies: ${hobbiesHTML}`;
+        });
+        
+        function editCard() {
+            document.getElementById('cardDisplay').style.display = 'none';
+            document.getElementById('formSection').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
