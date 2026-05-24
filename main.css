@@ -298,6 +298,19 @@ body{
     transform: scale(0.98);
 }
 
+.card-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card-emoji {
+    font-size: 120px;
+    display: inline-block;
+}
+
 .back-btn {
     margin-top: 10px;
     padding: 12px 30px;
