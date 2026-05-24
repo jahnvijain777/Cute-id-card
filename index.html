@@ -13,16 +13,16 @@
         <div class="form-section" id="formSection">
             <h2>Create Your ID Card</h2>
             <form id="cardForm">
-                <label for="pictureSelect" style="color: #00ccff; font-weight: bold;">Select Picture:</label>
-                <div class="picture-gallery">
-                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar1&background=ff4da6&color=fff&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar1&background=ff4da6&color=fff&size=140" alt="Avatar 1">
-                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar2&background=00ccff&color=000&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar2&background=00ccff&color=000&size=140" alt="Avatar 2">
-                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar3&background=ff66b8&color=fff&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar3&background=ff66b8&color=fff&size=140" alt="Avatar 3">
-                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar4&background=00ffff&color=1a1a1a&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar4&background=00ffff&color=1a1a1a&size=140" alt="Avatar 4">
-                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar5&background=ff4d4d&color=fff&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar5&background=ff4d4d&color=fff&size=140" alt="Avatar 5">
+                <label for="pictureSelect" style="color: #00ccff; font-weight: bold;">Select Emoji:</label>
+                <div class="emoji-gallery">
+                    <button type="button" class="emoji-option" data-emoji="🌹" data-label="Rose">🌹</button>
+                    <button type="button" class="emoji-option" data-emoji="⚔️" data-label="Sword">⚔️</button>
+                    <button type="button" class="emoji-option" data-emoji="😎" data-label="Cool">😎</button>
+                    <button type="button" class="emoji-option" data-emoji="😏" data-label="Smirk">😏</button>
+                    <button type="button" class="emoji-option" data-emoji="❤️" data-label="Heart">❤️</button>
                 </div>
                 <div class="upload-section">
-                    <label for="customPicture" style="color: #00ccff; font-weight: bold;">Or Upload Your Own:</label>
+                    <label for="customPicture" style="color: #00ccff; font-weight: bold;">Or Upload Your Own Image:</label>
                     <input type="file" id="customPicture" accept="image/*">
                 </div>
                 <input type="text" id="nameInput" placeholder="Enter Your Name" required>
@@ -35,7 +35,10 @@
         </div>
 
         <div class="card" id="cardDisplay" style="display:none;">
-            <img id="cardImg" src="figma.ico" alt="My Picture">
+            <div id="cardImageContainer" class="card-image-container">
+                <img id="cardImg" src="figma.ico" alt="My Picture" style="display:none;">
+                <span id="cardEmoji" class="card-emoji" style="display:none;"></span>
+            </div>
 
             <div class="info">
                 <h1 id="displayName">Jahnvi Jain</h1>
@@ -51,13 +54,17 @@
 
     <script>
         let selectedPicture = 'figma.ico';
+        let isEmoji = false;
+        let selectedEmoji = '';
 
-        // Picture selection from gallery
-        document.querySelectorAll('.picture-option').forEach(img => {
-            img.addEventListener('click', function() {
-                document.querySelectorAll('.picture-option').forEach(i => i.classList.remove('selected'));
+        // Emoji selection from gallery
+        document.querySelectorAll('.emoji-option').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.emoji-option').forEach(b => b.classList.remove('selected'));
                 this.classList.add('selected');
-                selectedPicture = this.getAttribute('data-picture');
+                selectedEmoji = this.getAttribute('data-emoji');
+                isEmoji = true;
                 document.getElementById('customPicture').value = '';
             });
         });
@@ -69,7 +76,8 @@
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     selectedPicture = event.target.result;
-                    document.querySelectorAll('.picture-option').forEach(i => i.classList.remove('selected'));
+                    isEmoji = false;
+                    document.querySelectorAll('.emoji-option').forEach(b => b.classList.remove('selected'));
                 };
                 reader.readAsDataURL(file);
             }
@@ -87,8 +95,16 @@
             document.getElementById('formSection').style.display = 'none';
             document.getElementById('cardDisplay').style.display = 'block';
             
-            // Update card image
-            document.getElementById('cardImg').src = selectedPicture;
+            // Update card image or emoji
+            if (isEmoji) {
+                document.getElementById('cardImg').style.display = 'none';
+                document.getElementById('cardEmoji').style.display = 'inline';
+                document.getElementById('cardEmoji').textContent = selectedEmoji;
+            } else {
+                document.getElementById('cardEmoji').style.display = 'none';
+                document.getElementById('cardImg').style.display = 'block';
+                document.getElementById('cardImg').src = selectedPicture;
+            }
             
             // Update card content
             document.getElementById('displayName').textContent = name;
