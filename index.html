@@ -13,16 +13,29 @@
         <div class="form-section" id="formSection">
             <h2>Create Your ID Card</h2>
             <form id="cardForm">
+                <label for="pictureSelect" style="color: #00ccff; font-weight: bold;">Select Picture:</label>
+                <div class="picture-gallery">
+                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar1&background=ff4da6&color=fff&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar1&background=ff4da6&color=fff&size=140" alt="Avatar 1">
+                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar2&background=00ccff&color=000&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar2&background=00ccff&color=000&size=140" alt="Avatar 2">
+                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar3&background=ff66b8&color=fff&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar3&background=ff66b8&color=fff&size=140" alt="Avatar 3">
+                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar4&background=00ffff&color=1a1a1a&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar4&background=00ffff&color=1a1a1a&size=140" alt="Avatar 4">
+                    <img class="picture-option" src="https://ui-avatars.com/api/?name=Avatar5&background=ff4d4d&color=fff&size=100" data-picture="https://ui-avatars.com/api/?name=Avatar5&background=ff4d4d&color=fff&size=140" alt="Avatar 5">
+                </div>
+                <div class="upload-section">
+                    <label for="customPicture" style="color: #00ccff; font-weight: bold;">Or Upload Your Own:</label>
+                    <input type="file" id="customPicture" accept="image/*">
+                </div>
                 <input type="text" id="nameInput" placeholder="Enter Your Name" required>
                 <input type="number" id="ageInput" placeholder="Enter Your Age" required>
                 <input type="text" id="collegeInput" placeholder="Enter Your College" required>
                 <input type="text" id="hobbiesInput" placeholder="Enter Hobbies (comma separated)" required>
                 <button type="submit" class="submit-btn">Create Card</button>
+                <button type="button" class="back-btn" onclick="window.location.href='splash.html'">Go Back</button>
             </form>
         </div>
 
         <div class="card" id="cardDisplay" style="display:none;">
-            <img src="figma.ico" alt="My Picture">
+            <img id="cardImg" src="figma.ico" alt="My Picture">
 
             <div class="info">
                 <h1 id="displayName">Jahnvi Jain</h1>
@@ -37,6 +50,31 @@
     </div>
 
     <script>
+        let selectedPicture = 'figma.ico';
+
+        // Picture selection from gallery
+        document.querySelectorAll('.picture-option').forEach(img => {
+            img.addEventListener('click', function() {
+                document.querySelectorAll('.picture-option').forEach(i => i.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedPicture = this.getAttribute('data-picture');
+                document.getElementById('customPicture').value = '';
+            });
+        });
+
+        // Custom picture upload
+        document.getElementById('customPicture').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    selectedPicture = event.target.result;
+                    document.querySelectorAll('.picture-option').forEach(i => i.classList.remove('selected'));
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
         document.getElementById('cardForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -48,6 +86,9 @@
             // Display the card
             document.getElementById('formSection').style.display = 'none';
             document.getElementById('cardDisplay').style.display = 'block';
+            
+            // Update card image
+            document.getElementById('cardImg').src = selectedPicture;
             
             // Update card content
             document.getElementById('displayName').textContent = name;

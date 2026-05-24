@@ -117,38 +117,15 @@ body{
     transform: scale(0.98);
 }
 
-.restart-btn {
-    margin-top: 30px;
-    padding: 12px 30px;
-    background: #00ccff;
-    color: #1a1a1a;
-    border: 2px solid #00ccff;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 15px #00ccff;
-}
-
-.restart-btn:hover {
-    background: transparent;
-    color: #00ccff;
-    box-shadow: 0 0 25px #00ccff;
-    transform: scale(1.05);
-}
-
-.restart-btn:active {
-    transform: scale(0.98);
-}
-
 .form-section {
     background: #1a1a1a;
     padding: 40px;
     border-radius: 20px;
     border: 2px solid #00ccff;
     box-shadow: 0 0 15px #00ccff;
-    width: 350px;
+    width: 400px;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
     z-index: 1;
 }
@@ -160,13 +137,79 @@ body{
     font-size: 20px;
 }
 
+.picture-gallery {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.picture-option {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 3px solid #ff4da6;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.picture-option:hover {
+    border-color: #00ccff;
+    box-shadow: 0 0 10px #00ccff;
+    transform: scale(1.05);
+}
+
+.picture-option.selected {
+    border-color: #00ffff;
+    box-shadow: 0 0 15px #00ccff, 0 0 25px #00ccff;
+    transform: scale(1.1);
+}
+
+.upload-section {
+    margin-bottom: 20px;
+}
+
+.upload-section label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#customPicture {
+    padding: 8px;
+    background: #2a2a2a;
+    border: 2px solid #ff4da6;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 12px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#customPicture::file-selector-button {
+    background: #ff4da6;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#customPicture::file-selector-button:hover {
+    background: #ff66b8;
+}
+
 #cardForm {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-#cardForm input {
+#cardForm input[type="text"],
+#cardForm input[type="number"] {
     padding: 12px;
     background: #2a2a2a;
     border: 2px solid #ff4da6;
@@ -206,6 +249,31 @@ body{
     transform: scale(0.98);
 }
 
+.back-btn {
+    padding: 12px;
+    background: #00ccff;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ccff;
+}
+
+.back-btn:hover {
+    background: transparent;
+    color: #00ccff;
+    border: 2px solid #00ccff;
+    box-shadow: 0 0 20px #00ccff;
+    transform: scale(1.05);
+}
+
+.back-btn:active {
+    transform: scale(0.98);
+}
+
 .edit-btn {
     margin-top: 15px;
     padding: 12px 30px;
@@ -227,5 +295,28 @@ body{
 }
 
 .edit-btn:active {
+    transform: scale(0.98);
+}
+
+.back-btn {
+    margin-top: 10px;
+    padding: 12px 30px;
+    background: #ff4da6;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #ff4da6;
+}
+
+.back-btn:hover {
+    background: #ff66b8;
+    box-shadow: 0 0 20px #ff4da6;
+    transform: scale(1.05);
+}
+.back-btn:active {
     transform: scale(0.98);
 }
